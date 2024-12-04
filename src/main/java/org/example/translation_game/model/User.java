@@ -1,8 +1,22 @@
 package org.example.translation_game.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-//@Entity
+@Entity
+@Table(name="user")
+@Getter
+@Setter
 public class User {
-    // 유저정보를 담고 있음
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
+
+    @Column(name="username")
+    private String userName;
+
+    private String password;
+
+    private String email;
 }
