@@ -24,3 +24,4 @@ Thumbs.db
 
 # 환경 파일
 .env
+application-secret.properties 
