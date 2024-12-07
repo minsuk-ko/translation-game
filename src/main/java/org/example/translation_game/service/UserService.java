@@ -9,16 +9,17 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
 
-    public boolean existByUserEmail(String email) {
-        return userRepository.existByUserEmail(email);
+    public boolean existEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
-    public boolean checkPassword(String email, String password) {
-        return userRepository.checkPassword(email, password);
+    public boolean checkPasswordByEmail(String email, String password) {
+        return userRepository.findPasswordByEmail(email).equals(password);
     }
 
     /**회원 가입*/
