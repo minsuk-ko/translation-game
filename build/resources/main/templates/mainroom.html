@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게임 방 만들기</title>
+</head>
+<body>
+<h1>게임 방 만들기</h1>
+<form action="/createRoom" method="POST">
+  <label for="roomname">방 이름:</label><br>
+  <input type="text" id="roomname" name="roomname" maxlength="25" required><br><br>
+
+  <label for="maxMember">최대 인원:</label><br>
+  <input type="number" id="maxMember" name="maxMember" min="1" max="10" required><br><br>
+
+  <label for="level">난이도:</label><br>
+  <select id="level" name="level" required>
+    <option value="1">쉬움</option>
+    <option value="2">보통</option>
+    <option value="3">어려움</option>
+  </select><br><br>
+
+  <label for="content">주제:</label><br>
+  <select id="content" name="content" required>
+    <option value="1">일반</option>
+    <option value="2">과학</option>
+    <option value="3">역사</option>
+  </select><br><br>
+
+  <label for="language">언어:</label><br>
+  <input type="radio" id="korean" name="language" value="true" required>
+  <label for="korean">한글</label>
+  <input type="radio" id="english" name="language" value="false" required>
+  <label for="english">영어</label><br><br>
+
+  <button type="submit">방 만들기</button>
+</form>
+</body>
+</html>

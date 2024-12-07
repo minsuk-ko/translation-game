@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user (
+   userId INT NOT NULL AUTO_INCREMENT, -- AUTO_INCREMENT로 자동 증가 설정
+   username VARCHAR(255) NOT NULL,
+	PASSWORD VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   PRIMARY KEY (userId) -- usserId를 PRIMARY KEY로 설정
+);
+
+
+
+
+
+
+
