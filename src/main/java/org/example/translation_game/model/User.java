@@ -4,28 +4,23 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name="user")
 @Getter
 @Setter
-@SequenceGenerator(
-        name="USER_SEQ_GEN",
-        sequenceName="USER_SEQ",
-        initialValue=1,
-        allocationSize=1
-)
+@Entity
+@Table(name = "user")
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "USER_SEQ_GEN")
-    @Column(name = "userId")
-    private long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Column(name = "username")
-    private String userName;
+    @Column(name = "username", nullable = false, length = 100)
+    private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
 }

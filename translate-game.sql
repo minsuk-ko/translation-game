@@ -1,48 +1,51 @@
+-- ✅ 1. 유저 테이블 생성
 DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE User (
-   userId INT NOT NULL AUTO_INCREMENT,
-   username VARCHAR(255) NOT NULL,
-   password VARCHAR(255) NOT NULL,
-   email VARCHAR(255) NOT NULL,
-   PRIMARY KEY (userId)
+CREATE TABLE `user` (
+                        user_id INT NOT NULL AUTO_INCREMENT,
+                        username VARCHAR(100) NOT NULL,
+                        password VARCHAR(100) NOT NULL,
+                        email VARCHAR(150) NOT NULL,
+                        PRIMARY KEY (user_id)
 );
 
-
-
-CREATE TABLE gameroom (
-   roomId INT NOT NULL AUTO_INCREMENT,
-   roomname VARCHAR(25) NOT NULL,
-   maxMember INT NOT NULL,m
-   currentMember INT NOT NULL,
-   status VARCHAR(255) NOT NULL,
-   createdAt TIMESTAMP NOT NULL,
-   level VARCHAR(25) NOT NULL,
-   content VARCHAR(255) NOT NULL,
-   language TINYINT NOT NULL,
-   PRIMARY KEY (roomId)
+-- ✅ 2. 게임룸 테이블 생성
+CREATE TABLE game_room (
+                           room_id INT NOT NULL AUTO_INCREMENT,
+                           room_name VARCHAR(25) NOT NULL,
+                           max_member INT NOT NULL,
+                           current_member INT NOT NULL,
+                           status VARCHAR(20) NOT NULL,
+                           created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                           level VARCHAR(25) NOT NULL,
+                           content VARCHAR(255) NOT NULL,
+                           language TINYINT NOT NULL,
+                           PRIMARY KEY (room_id)
 );
 
+-- ✅ 3. 참가자 테이블 생성
 CREATE TABLE participant (
-   roomId INT NOT NULL,
-   userId INT NOT NULL,
-   joinAt TIMESTAMP NOT NULL,
-   score INT NOT NULL DEFAULT 0,
-   isHost TINYINT(1) NOT NULL,
-   isReady TINYINT(1) NOT NULL,
-   PRIMARY KEY (roomId, userId),
-   FOREIGN KEY (roomId) REFERENCES gameroom (roomId),
-   FOREIGN KEY (userId) REFERENCES User (userId)
+                             room_id INT NOT NULL,
+                             user_id INT NOT NULL,
+                             join_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                             score INT NOT NULL DEFAULT 0,
+                             is_host BOOLEAN NOT NULL,
+                             is_ready BOOLEAN NOT NULL,
+                             PRIMARY KEY (room_id, user_id),
+                             CONSTRAINT fk_room_id FOREIGN KEY (room_id) REFERENCES game_room (room_id),
+                             CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES `user` (user_id)
 );
 
-CREATE TABLE CopyOfpersonalScore (
-   userId INT NOT NULL,
-   totalPlays INT NULL,
-   totalScoreSum INT NULL,
-   highScore INT NULL,
-   PRIMARY KEY (userId),
-   FOREIGN KEY (userId) REFERENCES User (userId)
+-- ✅ 4. 개인 점수 테이블 생성
+CREATE TABLE copy_of_personal_score (
+                                        user_id INT NOT NULL,
+                                        total_plays INT DEFAULT 0,
+                                        total_score_sum INT DEFAULT 0,
+                                        high_score INT DEFAULT 0,
+                                        PRIMARY KEY (user_id),
+                                        CONSTRAINT fk_user_id_score FOREIGN KEY (user_id) REFERENCES `user` (user_id)
 );
+
+
 
 
 
