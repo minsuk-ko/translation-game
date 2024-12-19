@@ -1,6 +1,5 @@
 package org.example.translation_game.controller;
 
-import lombok.Getter;
 import org.example.translation_game.model.User;
 import org.example.translation_game.service.UserService;
 import org.springframework.stereotype.Controller;
