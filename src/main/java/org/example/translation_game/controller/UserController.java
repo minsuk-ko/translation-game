@@ -2,6 +2,7 @@ package org.example.translation_game.controller;
 
 import org.example.translation_game.model.User;
 import org.example.translation_game.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserService userService;
+
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -30,11 +32,11 @@ public class UserController {
         if(email==null||password==null){
             return "redirect:/login";
         }
-        if(!userService.existByUserEmail(email)) {
+        if(!userService.existEmail(email)) {
             model.addAttribute("message", "존재하지 않는 이메일입니다.");
             return "redirect:/login";
         }
-        if (userService.checkPassword(email, password)) {
+        if (userService.checkPasswordByEmail(email, password)) {
             return "login_success";
         } else {
             model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
@@ -53,7 +55,7 @@ public class UserController {
         if(user==null){
             return "redirect:/signUp";
         }
-        if (userService.existByUserEmail(user.getEmail())) {
+        if (userService.existEmail(user.getEmail())) {
             model.addAttribute("message", "이미 존재하는 이메일입니다.");
             model.addAttribute("user",new User());
             return "redirect:/signUp";
