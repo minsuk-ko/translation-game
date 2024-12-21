@@ -26,3 +26,4 @@ Thumbs.db
 .env
 application-secret.properties 
 src/main/resources/application.properties
+src/main/resources/application.properties
