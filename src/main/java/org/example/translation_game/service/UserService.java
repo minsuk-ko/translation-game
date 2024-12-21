@@ -14,6 +14,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**이메일 중복검사*/
+    public boolean emailAvailable(String email) {
+        return !userRepository.existsByEmail(email);
+    }
 
     public boolean existEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
@@ -24,7 +28,15 @@ public class UserService {
 
     /**회원 가입*/
     public void signUp(User user) {
-        userRepository.save(user);
+        User saveUser = new User();
+        saveUser.setUserId(null);
+        saveUser.setUsername(user.getUsername());
+        saveUser.setPassword(user.getPassword());
+        saveUser.setEmail(user.getEmail());
+
+        userRepository.save(saveUser);
     }
+
+
 
 }

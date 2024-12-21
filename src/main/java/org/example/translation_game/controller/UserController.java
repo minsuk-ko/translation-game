@@ -44,24 +44,24 @@ public class UserController {
         }
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/signup")
     public String signUp() {
-        return "signUp";
+        return "signup";
     }
 
     /** 회원가입 */
-    @PostMapping("/signUp_pro")
+    @PostMapping("/api/signUp_pro")
     public String signUp_pro(Model model, @ModelAttribute("user") User user) {
         if(user==null){
-            return "redirect:/signUp";
+            return "redirect:/signup";
         }
         if (userService.existEmail(user.getEmail())) {
             model.addAttribute("message", "이미 존재하는 이메일입니다.");
             model.addAttribute("user",new User());
-            return "redirect:/signUp";
+            return "redirect:/signup";
         } else {
             userService.signUp(user);
-            return "signUp_success";
+            return "login";
         }
     }
 }

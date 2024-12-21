@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="signup-container">
+        <h1>회원가입</h1>
+        <form action="/api/signUp_pro" method="post">
+            <div class="form-group">
+                <label for="username">사용자 이름</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" required>
+                <button type="button" id="emailCheckButton">중복체크</button>
+                <p id="emailCheckResult"></p>
+            </div>
+            <button type="submit">회원가입</button>
+        </form>
+        <p>이미 계정이 있으신가요? <a href="/login">로그인</a></p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+                let emailChecked = false;
+                let emailValid = false;
+
+            $("#emailCheckButton").click(function () {
+                const email = $("#email").val();
+                const emailCheckResult = $("#emailCheckResult");
+                
+
+                if (!email) {
+                    emailCheckResult.text("이메일을 입력해주세요.").css("color", "orange");
+                    return;
+                }
+
+                // AJAX 요청
+                $.ajax({
+                    url: "/api/user/emailCheck", // Spring Boot API 엔드포인트
+                    type: "GET",
+                    data: { email: email },
+                    success: function (isAvailable) {
+                        if (isAvailable) {
+
+                            emailCheckResult.text("사용 가능한 이메일입니다!").css("color", "green");
+                            emailChecked=true;
+                            emailValid=true;
+                        } else {
+                            emailCheckResult.text("이미 존재하는 이메일입니다.").css("color", "red");
+                            emailChecked=true;
+                            emailValid=false;
+                        }
+                    },
+                    error: function () {
+                        emailCheckResult.text("중복체크 오류").css("color", "orange");
+                    },
+                });
+            });
+
+            $("#email").on("input",function(){
+                emailChecked=false;
+                emailValid=false;
+                $("emailCheckResult").text("");
+            })
+        
+    
+        $("#signup_pro").submit(function (evenet){
+            
+            if(!emailChecked){
+                alert("이메일 중복체크를 해주세요.")
+                event.preventDefault();
+                return;
+            }
+            if(!emailValid){
+                alert("사용 가능한 이메일이 아닙니다.")
+                event.preventDefault();
+                return;
+            }
+
+            alert("회원가입이 완료되었습니다.")
+
+        });
+
+        
+    });
+
+    </script>
+    
+</body>
+
+</html>

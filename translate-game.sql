@@ -1,12 +1,17 @@
 -- ✅ 1. 유저 테이블 생성
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `game_room`;
+DROP TABLE IF EXISTS `participant`;
+DROP TABLE IF EXISTS `copy_of_personal_score`;
+
+CREATE TABLE `users` (
                         user_id INT NOT NULL AUTO_INCREMENT,
                         username VARCHAR(100) NOT NULL,
                         password VARCHAR(100) NOT NULL,
                         email VARCHAR(150) NOT NULL,
                         PRIMARY KEY (user_id)
 );
+ 
 
 -- ✅ 2. 게임룸 테이블 생성
 CREATE TABLE game_room (
@@ -41,7 +46,7 @@ CREATE TABLE copy_of_personal_score (
                                         total_plays INT DEFAULT 0,
                                         total_score_sum INT DEFAULT 0,
                                         high_score INT DEFAULT 0,
-                                        PRIMARY KEY (user_id),
+                                        PRIMARY KEY (use`user`r_id),
                                         CONSTRAINT fk_user_id_score FOREIGN KEY (user_id) REFERENCES `user` (user_id)
 );
 
@@ -51,5 +56,6 @@ CREATE TABLE copy_of_personal_score (
 
 
 
+SHOW DATABASE;
 
 
