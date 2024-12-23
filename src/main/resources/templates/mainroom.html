@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>게임 방 만들기</title>
+  <style>
+    .button-container {
+      margin-top: 20px;
+    }
+    .button-container a, .button-container button {
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #4CAF50; /* 초록색 */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button-container a:hover, .button-container button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
 <h1>게임 방 만들기</h1>
@@ -36,5 +53,9 @@
 
   <button type="submit">방 만들기</button>
 </form>
+
+<div class="button-container">
+  <a href="/mypage">마이페이지로 이동</a>
+</div>
 </body>
 </html>
