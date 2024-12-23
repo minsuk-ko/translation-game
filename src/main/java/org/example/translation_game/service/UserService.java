@@ -23,7 +23,18 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
     public boolean checkPasswordByEmail(String email, String password) {
-        return userRepository.findPasswordByEmail(email).equals(password);
+        if(userRepository.findByEmail(email).isPresent()) {
+            User user = userRepository.findByEmail(email).get();
+            return user.getPassword().equals(password);
+        }
+        return false;
+    }
+
+    public User getUserByEmail(String email) {
+        if(userRepository.findByEmail(email).isPresent()) {
+            System.out.println(userRepository.findByEmail(email).get().getEmail());
+        }
+        return userRepository.findByEmail(email).get();
     }
 
     /**회원 가입*/

@@ -56,6 +56,6 @@ CREATE TABLE copy_of_personal_score (
 
 
 
-SHOW DATABASE;
+
 
 

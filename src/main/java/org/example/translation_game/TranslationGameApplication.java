@@ -13,5 +13,4 @@ public class TranslationGameApplication {
         System.out.println("실행 성공");
 
     }
-
 }

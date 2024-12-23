@@ -1,5 +1,6 @@
 package org.example.translation_game.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.translation_game.model.User;
 import org.example.translation_game.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserController {
     /** 로그인 */
     @PostMapping("/login_pro")
     public String login_pro(@RequestParam(value="email") String email,
-                            @RequestParam(value="password") String password, Model model) {
+                            @RequestParam(value="password") String password, Model model, HttpSession session) {
         if(email==null||password==null){
             return "redirect:/login";
         }
@@ -37,6 +38,9 @@ public class UserController {
             return "redirect:/login";
         }
         if (userService.checkPasswordByEmail(email, password)) {
+            session.setAttribute("userLoginSession",userService.getUserByEmail(email));
+            User user =(User)session.getAttribute("userLoginSession");
+            System.out.println(user.getEmail());
             return "login_success";
         } else {
             model.addAttribute("message", "비밀번호가 일치하지 않습니다.");

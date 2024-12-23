@@ -24,11 +24,7 @@ Thumbs.db
 
 # 환경 파일
 .env
-application-secret.properties 
-<<<<<<< HEAD
-.properties
-=======
+application-secret.properties
+application.properties
 src/main/resources/application.properties
-src/main/resources/application.properties
-src/main/resources/application.properties
->>>>>>> 832f5d9727da9288c50469e9e9ff647a2e0e92c0
+
