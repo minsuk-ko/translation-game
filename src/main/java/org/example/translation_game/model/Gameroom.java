@@ -41,4 +41,3 @@ public class Gameroom {
     @Column(name = "language", nullable = false)
     private Boolean language;
 }
-

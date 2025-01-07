@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방 리스트</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow-y: scroll;
+            position: relative;
+        }
+
+        .dashboard {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            margin-top: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .search-bar input,
+        .search-bar select {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar select {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+        }
+
+        .room-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .room-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .room-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .room-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .room-info p {
+            margin: 0.2rem 0 0;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        .room-status {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .room-status.waiting {
+            color: #1abc9c;
+        }
+
+        .room-status.in-progress {
+            color: #f1c40f;
+        }
+
+        .room-status.finished {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <h1>방 리스트</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="방 이름 검색">
+        <select id="filterSelect">
+            <option value="all">모든 상태</option>
+            <option value="waiting">대기중</option>
+            <option value="in-progress">게임중</option>
+            <option value="finished">게임 끝</option>
+        </select>
+    </div>
+    <div class="room-list" id="roomList"></div>
+</div>
+
+<script>
+    const rooms = [
+        { id: 1, name: '초보자 방', currentPlayers: 2, maxPlayers: 4, topic: '한국어', difficulty: '쉬움', status: 'waiting' },
+        { id: 2, name: '중급자 방', currentPlayers: 3, maxPlayers: 4, topic: '영어', difficulty: '중간', status: 'in-progress' },
+        { id: 3, name: '고급자 방', currentPlayers: 4, maxPlayers: 4, topic: '프랑스어', difficulty: '어려움', status: 'finished' },
+        { id: 4, name: '환영 방', currentPlayers: 1, maxPlayers: 6, topic: '일본어', difficulty: '쉬움', status: 'waiting' },
+    ];
+
+    function renderRooms(filter = 'all', searchQuery = '') {
+        const roomList = document.getElementById('roomList');
+        roomList.innerHTML = '';
+
+        const filteredRooms = rooms.filter(room => {
+            const matchesStatus = filter === 'all' || room.status === filter;
+            const matchesSearch = room.name.includes(searchQuery);
+            return matchesStatus && matchesSearch;
+        });
+
+        filteredRooms.forEach(room => {
+            const roomItem = document.createElement('div');
+            roomItem.className = 'room-item';
+            roomItem.innerHTML = `
+      <div class="room-info">
+        <h3>${room.name}</h3>
+        <p>${room.currentPlayers}/${room.maxPlayers} | ${room.topic} | ${room.difficulty}</p>
+      </div>
+      <div class="room-status ${room.status}">
+        ${room.status === 'waiting' ? '대기중' : room.status === 'in-progress' ? '게임중' : '게임 끝'}
+      </div>
+    `;
+            if (room.status !== 'finished') {
+                roomItem.addEventListener('click', () => alert(`${room.name} 방에 입장합니다.`));
+            }
+            roomList.appendChild(roomItem);
+        });
+    }
+
+    document.getElementById('filterSelect').addEventListener('change', (e) => {
+        renderRooms(e.target.value, document.getElementById('searchInput').value);
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        renderRooms(document.getElementById('filterSelect').value, e.target.value);
+    });
+
+    renderRooms();
+</script>
+</body>
+</html>

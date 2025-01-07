@@ -1,61 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>게임 방 만들기</title>
+  <title>게임 대시보드</title>
   <style>
-    .button-container {
-      margin-top: 20px;
+    /* 기존 스타일 유지 */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
     }
-    .button-container a, .button-container button {
-      text-decoration: none;
-      padding: 10px 20px;
-      background-color: #4CAF50; /* 초록색 */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+              45deg,
+              rgba(0, 0, 0, 0.1) 0px,
+              rgba(0, 0, 0, 0.1) 2px,
+              transparent 2px,
+              transparent 4px
+      );
+      pointer-events: none;
+    }
+    .dashboard {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3rem;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .dashboard h1 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+    .buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .button {
+      width: 180px;
+      height: 180px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
       color: white;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
     }
-    .button-container a:hover, .button-container button:hover {
-      background-color: #45a049;
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+              120deg,
+              transparent,
+              rgba(255, 255, 255, 0.2),
+              transparent
+      );
+      transition: 0.5s;
+    }
+    .button:hover::before {
+      left: 100%;
+    }
+    .button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+    .my-profile {
+      background: linear-gradient(135deg, rgba(88, 43, 255, 0.2), rgba(88, 43, 255, 0.1));
+    }
+    .create-room {
+      background: linear-gradient(135deg, rgba(41, 128, 185, 0.2), rgba(41, 128, 185, 0.1));
+    }
+    .join-room {
+      background: linear-gradient(135deg, rgba(192, 57, 43, 0.2), rgba(192, 57, 43, 0.1));
     }
   </style>
 </head>
 <body>
-<h1>게임 방 만들기</h1>
-<form action="/createRoom" method="POST">
-  <label for="roomname">방 이름:</label><br>
-  <input type="text" id="roomname" name="roomname" maxlength="25" required><br><br>
-
-  <label for="maxMember">최대 인원:</label><br>
-  <input type="number" id="maxMember" name="maxMember" min="1" max="10" required><br><br>
-
-  <label for="level">난이도:</label><br>
-  <select id="level" name="level" required>
-    <option value="1">쉬움</option>
-    <option value="2">보통</option>
-    <option value="3">어려움</option>
-  </select><br><br>
-
-  <label for="content">주제:</label><br>
-  <select id="content" name="content" required>
-    <option value="1">일반</option>
-    <option value="2">과학</option>
-    <option value="3">역사</option>
-  </select><br><br>
-
-  <label for="language">언어:</label><br>
-  <input type="radio" id="korean" name="language" value="true" required>
-  <label for="korean">한글</label>
-  <input type="radio" id="english" name="language" value="false" required>
-  <label for="english">영어</label><br><br>
-
-  <button type="submit">방 만들기</button>
-</form>
-
-<div class="button-container">
-  <a href="/mypage">마이페이지로 이동</a>
+<div class="dashboard">
+  <h1>게임 대시보드</h1>
+  <div class="buttons">
+    <a href="mypage.html" class="button my-profile">
+      <div class="icon">👤</div>
+      내 정보
+    </a>
+    <a href="makeroom.html" class="button create-room">
+      <div class="icon">🚪</div>
+      방 만들기
+    </a>
+    <a href="joingame.html" class="button join-room">
+      <div class="icon">🎮</div>
+      방 참여하기
+    </a>
+  </div>
 </div>
 </body>
 </html>
