@@ -46,7 +46,7 @@ public class OpenAIService { // openai api와 통신하기 위한 서비스 클�
 
         // 응답 처리
         if (response != null && !response.getChoices().isEmpty()) { // 응답이 null이 아니고 choice가 비어있지 않을때
-            return response.getChoices().get(0).getText().trim(); // 첫 번째 텍스트를 가져와 앞뒤 공백을 제거하고 반환
+          //  return response.getChoices().get(0).getText().trim(); // 첫 번째 텍스트를 가져와 앞뒤 공백을 제거하고 반환
         }
         return "No response from OpenAI.";
     }
