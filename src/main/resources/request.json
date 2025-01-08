@@ -1,0 +1,11 @@
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Translate this sentence: Hello!"
+    }
+  ],
+  "max_tokens": 150,
+  "temperature": 0.7
+}

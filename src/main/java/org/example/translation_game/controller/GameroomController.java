@@ -1,23 +1,24 @@
+/*
 package org.example.translation_game.controller;
 
 
 import com.example.translation_game.service.GameroomService;
-import com.example.translation_game.entity.Gameroom;
+//import com.example.translation_game.entity.Gameroom;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@ReqestMapping("/gamerooms")
+@RequestMapping("/gamerooms")
 public class GameroomController {
     private final GameroomService gameroomService;
 
-    publice GameroomController(GameroomService gameroomService){
+    public GameroomController(GameroomService gameroomService){
         this.gameroomService = gameroomService;
     }
 
     // 방 리스트 조회
     @GetMapping
-    public List<Gameroom> getGamerooms(
+    //public List<Gameroom> getGamerooms(
             @RequestParam(value = "status", required = false) String status,
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "sort", required = false, defaultValue = "latest") String sort) {
@@ -48,3 +49,4 @@ public class GameroomController {
     }
 
 }
+*/

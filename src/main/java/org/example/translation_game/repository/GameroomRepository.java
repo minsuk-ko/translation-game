@@ -1,3 +1,4 @@
+/*
 package com.example.game.repository;
 
 import com.example.game.entity.Gameroom;
@@ -17,3 +18,4 @@ public interface GameroomRepository extends JpaRepository<Gameroom, Long> {
 
     List<Gameroom> findAllByOrderByCreatedAtDesc();
 }
+*/

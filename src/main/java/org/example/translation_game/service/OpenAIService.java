@@ -7,8 +7,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 
-import org.example.translation_game.dto.OpenAIRequest;
-import org.example.translation_game.dto.OpenAIResponse;
+import org.example.translation_game.dto.OpenAiRequest;
+import org.example.translation_game.dto.OpenAiResponse;
 
 @Service
 public class OpenAIService { // openai api와 통신하기 위한 서비스 클래스
@@ -31,18 +31,18 @@ public class OpenAIService { // openai api와 통신하기 위한 서비스 클�
         headers.set("Content-Type", "application/json"); // 요청 데이터 형식을 json으로
 
         // 요청 본문 설정
-        OpenAIRequest request = new OpenAIRequest(); // 요청 데이터를 담는 dto
+        OpenAiRequest request = new OpenAiRequest(); // 요청 데이터를 담는 dto
         request.setModel("text-davinci-003"); // 사용 모델 설정
         request.setPrompt(prompt); // 사용 프롬포트 설정
         request.setMaxTokens(150);
         request.setTemperature(0.7);
 
         // HTTP 요청 엔터티 생성
-        HttpEntity<OpenAIRequest> entity = new HttpEntity<>(request, headers);
+        HttpEntity<OpenAiRequest> entity = new HttpEntity<>(request, headers);
 
         // OpenAI API 호출
-        ResponseEntity<OpenAIResponse> responseEntity = restTemplate.postForEntity(url, entity, OpenAIResponse.class);
-        OpenAIResponse response = responseEntity.getBody(); // 응답 본문을 OpenAIResponse 객체로 추출
+        ResponseEntity<OpenAiResponse> responseEntity = restTemplate.postForEntity(url, entity, OpenAiResponse.class);
+        OpenAiResponse response = responseEntity.getBody(); // 응답 본문을 OpenAIResponse 객체로 추출
 
         // 응답 처리
         if (response != null && !response.getChoices().isEmpty()) { // 응답이 null이 아니고 choice가 비어있지 않을때

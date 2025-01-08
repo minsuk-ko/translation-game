@@ -1,3 +1,4 @@
+/*
 package org.example.translation_game.model;
 
 import jakarta.persistence.*;
@@ -41,3 +42,4 @@ public class Gameroom {
     @Column(name = "language", nullable = false)
     private Boolean language;
 }
+*/

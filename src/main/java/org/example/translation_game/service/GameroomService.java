@@ -1,3 +1,5 @@
+/*
+
 package com.example.translation_game.service;
 
 import com.example.translation_game.entity.Gameroom;
@@ -65,3 +67,4 @@ public class GameroomService {
     }
 }
 
+*/
