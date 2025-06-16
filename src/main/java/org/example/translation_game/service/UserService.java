@@ -19,7 +19,9 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
     public boolean checkPasswordByEmail(String email, String password) {
-        return userRepository.findPasswordByEmail(email).equals(password);
+        return userRepository.findPasswordByEmail(email)
+                .map(password::equals)
+                .orElse(false);
     }
 
     /**회원 가입*/
