@@ -46,7 +46,12 @@ public class UserController {
 
     @GetMapping("/signUp")
     public String signUp() {
-        return "signUp";
+        return "signup";
+    }
+
+    @GetMapping("/myPage")
+    public String myPage() {
+        return "mypage";
     }
 
     /** 회원가입 */
@@ -61,7 +66,7 @@ public class UserController {
             return "redirect:/signUp";
         } else {
             userService.signUp(user);
-            return "signUp_success";
+            return "signup_success";
         }
     }
 }
