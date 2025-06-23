@@ -5,6 +5,7 @@ import org.example.translation_game.repository.GameroomRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameroomService {
@@ -23,5 +24,13 @@ public class GameroomService {
         return gameroomRepository.findAll().stream()
                 .filter(room -> room.getRoomName().equals(roomName))
                 .toList();
+    }
+
+    public Gameroom findById(Long roomId) {
+        return gameroomRepository.findById(roomId).orElse(null);
+    }
+
+    public Gameroom save(Gameroom gameroom) {
+        return gameroomRepository.save(gameroom);
     }
 }

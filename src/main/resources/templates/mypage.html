@@ -8,7 +8,10 @@
 <body>
 <div class="signup-container">
     <h2>마이페이지</h2>
-    <p>사용자 정보를 여기에 표시합니다.</p>
+    <p>게임 기록</p>
+    <ul>
+        <li th:each="record : ${records}" th:text="${record.content}"></li>
+    </ul>
     <a href="/">홈으로</a>
 </div>
 </body>

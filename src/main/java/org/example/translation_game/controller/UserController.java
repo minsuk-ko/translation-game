@@ -2,7 +2,7 @@ package org.example.translation_game.controller;
 
 import org.example.translation_game.model.User;
 import org.example.translation_game.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.translation_game.service.GameRecordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserService userService;
+    private final GameRecordService gameRecordService;
 
-
-    public UserController(UserService userService) {
+    public UserController(UserService userService, GameRecordService gameRecordService) {
         this.userService = userService;
+        this.gameRecordService = gameRecordService;
     }
 
     @GetMapping("/login")
@@ -50,7 +51,8 @@ public class UserController {
     }
 
     @GetMapping("/myPage")
-    public String myPage() {
+    public String myPage(@RequestParam String email, Model model) {
+        model.addAttribute("records", gameRecordService.getRecords(email));
         return "mypage";
     }
 
