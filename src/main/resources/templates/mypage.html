@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="signup-container">
+    <h2>마이페이지</h2>
+    <p>게임 기록</p>
+    <ul>
+        <li th:each="record : ${records}" th:text="${record.content}"></li>
+    </ul>
+    <a href="/">홈으로</a>
+</div>
+</body>
+</html>
